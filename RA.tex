@@ -1,0 +1,143 @@
+\documentclass[11pt]{article}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\pagestyle{plain}
+\usepackage{amssymb}
+\usepackage{ntheorem}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{braket}
+\usepackage{hyperref}
+\theorembodyfont{\rmfamily}
+\setmainfont{Times New Roman}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\title{\textsc{Real Analysis: Definitions and Theorems}}
+\author{\textsc{Jincheng Wang}}
+\date{\url{jc-wang@sjtu.edu.cn}}
+\begin{document}
+\maketitle
+\section{Measure Theory}
+\section{Lebesgue Integral}
+\section{Differentiation and Integral}
+\section{Hilbert Space: An Introduction}
+\subsection{$L^2$ space}
+\begin{proposition}
+    The Space $L^2(\mathbb{R}^d)$ has the following properties:
+    \begin{description}
+        \item[(i)] $L^2(\mathbb{R}^d)$ is a vector space.
+        \item[(ii)]$f(x)\overline{g(x)}$ is integrable whenever $f,g\in L^2(\mathbb{R}^d)$, and the Cauchy-Schwarz inequality holds: $|(f,g)|\leq ||f||\ ||g||$.
+        \item[(iii)]  If $g\in L^2(\mathbb{R}^d)$ is fixed, the map $f\mapsto (f,g)$ is linear in $f$, and also $(f,g)=\overline{(g,f)}$.
+        \item[(iv)] The triangle inequality holds: $||f+g||\leq||f||+||g||$
+    \end{description}
+\end{proposition}
+
+\begin{theorem}
+    The space $L^2(\mathbb{R}^d)$ is complete in its metric.
+\end{theorem}
+
+\begin{theorem}
+    The space $L^2(\mathbb{R}^d)$ is \textbf{separable}, int the sense that there exists a countable collection $\{f_k\}$ of elements in $L^2(\mathbb{R}^d)$ such that their linear combinations are dense in $L^2(\mathbb{R}^d)$
+\end{theorem}
+\subsection{Hilbert space}
+\begin{definition}
+    A set $\mathcal{H}$ is a \textbf{Hilbert Space} if it satisfies the following:
+    \begin{description}
+        \item[(i)] $\mathcal{H}$ is a vector space over $\mathbb{C}$ (or $\mathbb{R}$).
+        \item[(ii)] $\mathcal{H}$ is equipped with an inner product $(\cdot,\cdot)$, so that
+        \begin{description}
+            \item[1.] $f\mapsto (f,g)$ is linear on $\mathcal{H} $ for every fixed $g\in \mathcal{H} $
+            \item[2.] $(f,g)=\overline{(g,f)}$
+            \item[3.] $(f,f)\geq 0$ for all $f\in \mathcal{H} $ 
+        \end{description}
+        We let $||f||=(f,f)^{1/2}$.
+        \item[(iii)] $||f||=0$ if and only if $f=0$.
+        \item[(iv)] The Cauchy-Schwarz and triangle inequalities hold \[|(f,g)|\leq ||f||\ ||g||\quad and\quad ||f+g||\leq||f||+||g||\] 
+        \item[(v)] $\mathcal{H} $ is complete in the metric $d(f,g)=||f-g||$.
+        \item[(vi)] $\mathcal{H} $ is seperable.
+    \end{description}
+\end{definition}
+
+\begin{definition}
+    \textbf{(Orthogonality)}
+    Two element $f$ and $g$ in a Hilbert space $\mathcal{H}$ with inner product $(\cdot,\cdot)$ are \textbf{orthogonal} or \textbf{perpendicular} if $(f,g)=0$, and we write $f\perp g$.
+\end{definition}
+
+\begin{proposition}
+    If $f\perp g$, then $||f+g||^2=||f||^2+||g||^2$.
+\end{proposition}
+
+\begin{proposition}
+    If $\{e_k\}_{k=1}^\infty$ is orthonormal, and $f=\sum a_ke_k\in \mathcal{H}$ where the sum is finite, then
+    \[||f||^2=\sum|a_k|^2.\]
+\end{proposition}
+
+\begin{theorem}
+    The following properties of an orthonormal set $\{e_k\}_{k=1}^\infty$ are equivalent.
+    \begin{description}
+        \item[(i)] Finite linear combinations of elements in $\{e_k\}$ are dense in $\mathcal{H}$.
+        \item[(ii)] If $f\in\mathcal{H}$ and $(f,e_j)=0$ for all $j$, then $f=0$.
+        \item[(iii)] If $f\in\mathcal{H}$, and $S_N(f)=\sum_{k=1}^Na_ke_k$, where $a_k=(f,e_k)$, then $S_N(f)\to f$ as $N\to \infty$ in the norm.
+        \item[(iv)] If $a_k=(f,e_k)$, then $||f||^2=\sum_{k=1}^\infty |a_k|^2$ 
+    \end{description}
+\end{theorem}
+
+\begin{theorem}
+    Any Hilbert space has an orthonormal basis.
+\end{theorem}
+
+\begin{definition}
+    Give two Hilbert spaces $\mathcal{H}$ and $\mathcal{H}'$ with respective inner products $(\cdot,\cdot)_\mathcal{H}$ and $(\cdot,\cdot)_{\mathcal{H}'}$. A mapping $U:\mathcal{H}\to\mathcal{H}'$ between these space is called \textbf{unitary} if:
+    \begin{description}
+        \item[(i)] $U$ is linear, that is, $U(\alpha f+\beta g)=\alpha U(f)+\beta U(g)$.
+        \item[(ii)] $U$ is a bijection.
+        \item[(iii)] $||Uf||_{\mathcal{H}'}=||f||_{\mathcal{H}}$ for all $f\in \mathcal{H}$
+    \end{description}
+\end{definition}
+
+\begin{corollary}
+    Any two infinte-dimesional Hilbert spaces are unitarily equivalent.
+\end{corollary}
+
+\begin{corollary}
+    Any two finite-dimensional Hilbert spaces are unitarily equivalent if and only if they have the same dimension.
+\end{corollary}
+
+\begin{definition}
+    \textbf{Pre-Hilbert space} is a space $\mathcal{H}_0$ that satisfies all the defining properties of a Hilbert space except (v).
+\end{definition}
+
+\begin{proposition}
+    Suppose we are given a pre-Hilbert space $\mathcal{H}_0$ with inner product $(\cdot,\cdot)_0$. Then we can find a Hilbert space $\mathcal{H}$ with inner product $(\cdot,\cdot)$ such that
+    \begin{description}
+        \item[(i)] $\mathcal{H}_0\subset \mathcal{H}$.
+        \item[(ii)] $(f,g)_0=(f,g)$ whenever $f,g\in\mathcal{H}_0$.
+        \item[(iii)] $\mathcal{H}_0 $ is dense in $\mathcal{H}$.
+    \end{description}
+\end{proposition}
+
+\subsection{Fourier series and Fatou's theorem}
+\begin{theorem}
+    Suppose $f$ is integrable on $[-\pi,\pi]$.
+    \begin{description}
+        \item[(i)] If $a_n=0$ for all $n$, then $f(x)=0$ for a.e. x.
+        \item[(ii)] $\sum_{n=-\infty}^\infty a_nr^{|n|}e^{inx}$ tends to $f(x)$ for a.e. x, as $r\to1 $, $r<1$.
+    \end{description}
+    In the theorem above, $a_n$ is the n-th Fourier coefficient of $f$
+    \[a_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}dx\]
+\end{theorem}
+\begin{theorem}
+    Suppose $f\in L^2([-\pi,\pi])$. Then:
+    \begin{description}
+        \item[(1)] We have Parseval's relation
+    \end{description}
+\end{theorem}
+\section*{References}
+\end{document}
