@@ -12,12 +12,13 @@
 \usepackage{graphicx}
 \usepackage{braket}
 \usepackage{hyperref}
-\theorembodyfont{\rmfamily}
-\setmainfont{Times New Roman}
+\usepackage{mathrsfs}
+\theorembodyfont{\normalfont}
 \newtheorem{theorem}{Theorem}[subsection]
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
 
 \title{\textsc{Real Analysis: Definitions and Theorems}}
 \author{\textsc{Jincheng Wang}}
@@ -136,8 +137,104 @@
 \begin{theorem}
     Suppose $f\in L^2([-\pi,\pi])$. Then:
     \begin{description}
-        \item[(1)] We have Parseval's relation
+        \item[(i)] We have Parseval's relation \[\sum_{n=-\infty}^\infty|a_n|^2=\frac{1}{2\pi}\int_{-\pi}^\pi |f(x)|dx\].
+        \item[(ii)] The mapping $f\mapsto \{a_n\}$ is a unitary correspondence between $L^2([-\pi,\pi])$ and ${l}^2(\mathbb{Z})$.
+        \item[(iii)] The Fourier series of $f$ converges to $f$ in the $L^2$-norm, that is,\[\frac{1}{2\pi}\int_{-\pi}^\pi|f(x)-S_N(f)(x)|^2dx\to 0\quad as\ N\to\infty\] where $S_N(f)=\sum_{|n|\leq N}a_ne^{inx}$.
     \end{description}
 \end{theorem}
+
+\begin{definition}
+    If $F$ is a function defined in the unit disc $\mathbb{D}$, we say that $F$ has a radial limit at the point $-\pi\leq\theta\leq\pi$ on the circle, if the limit\[\lim_{r<1,\ r\to 1}F(re^{i\theta})\] exists.
+\end{definition}
+
+\begin{theorem}
+    A bounded holomorphic function $F(re^{i\theta})$ on the unit disc has radial limits at almost every $\theta$.
+\end{theorem}
+
+\begin{definition}
+    We define the \textbf{Hardy Space} $H^2(\mathbb{D})$ to consist of all holomorphic functions $F$ on the unit disc $\mathbb{D}$ that satisfy
+    \[\sup_{0\leq r<1}\frac{1}{2\pi}\int_{-\pi}^{\pi}|F(re^{i\theta})|^2d\theta<\infty\]
+    we also define the "norm" for functions $F$ in this class, $||F||_{H^2(\mathbb{D})}$, to be the square root of the above quantity.
+\end{definition}
+
+\subsection{Closed subspaces and orthogonal projections}
+\begin{definition}
+    A \textbf{linear subspace} $\mathcal{S}$ of $\mathcal{H}$ is a subset of $\mathcal{H}$ that satisfies $\alpha f+\beta g\in\mathcal{S}$ whenever $f,g\in \mathcal{S}$ and $\alpha$, $\beta$ are scalars. The subspace $\mathcal{S}$ is \textbf{closed} if whenever $\{f_n\}\subset \mathcal{S}$ converges to some $f\in \mathcal{H}$, then $f$ also belongs to $\mathcal{S}$.
+\end{definition}
+
+\begin{lemma}
+    Suppose $\mathcal{S}$ is a closed subspace of $\mathcal{H}$ and $f\in \mathcal{H}$. Then:
+    \begin{description}
+        \item[(i)] There exists a (unique) element $g_0\in\mathcal{S}$ which is closest to $f$, in the sense that\[||f-g_0||=\inf_{g\in\mathcal{S}}||f-g||\]
+        \item[(ii)] The element $f-g_0$ is perpendicular to $\mathcal{S}$, that is,\[(f-g_0,g)=0\quad for\ all\ g\in \mathcal{S}\]
+    \end{description}
+\end{lemma}
+
+\begin{definition}
+    If $\mathcal{S}$ is a subspace of a Hilbert space $\mathcal{H}$, we define the orthogonal complement of $\mathcal{S}$ by\[\mathcal{S}^\perp=\{f\in\mathcal{H}:(f,g)=0\quad for\ all\ g\in\mathcal{S}\}\]
+\end{definition}
+
+\begin{proposition}
+    If $\mathcal{S}$ is a closed subspace of a Hilbert space $\mathcal{H}$, then
+    \[\mathcal{H}=\mathcal{S}\bigoplus \mathcal{S}^\perp\]
+\end{proposition}
+
+\begin{definition}
+    The mapping $P_\mathcal{S}$ is called the orthogonal projection onto $\mathcal{S}$ and satisfies the following simple properties:
+    \begin{description}
+        \item[(i)] $f\mapsto P_\mathcal{S}(f)$ is linear.
+        \item[(ii)] $P_\mathcal{S}(f)=f$ whenever $f\in\mathcal{S}$.
+        \item[(iii)] $P_\mathcal{S}(f)=0$ whenever $f\in\mathcal{S}^\perp$.
+        \item[(iv)] $||P_\mathcal{S}(f)||\leq||f||$ for all $f\in \mathcal{H}$.
+    \end{description}
+\end{definition}
+
+\subsection{Linear transformation}
+\begin{definition}
+    Suppose $\mathcal{H}_1$ and $\mathcal{H}_2$ are two Hilbert spaces. Amapping $T:\mathcal{H}_1\to\mathcal{H}_2$ is a linear transformation (also called linear operator or operator) if
+    \[T(af+bg)=aT(f)+bT(g)\quad for\ all\ scalars\ a,b\ and\ f,g\in \mathcal{H}_1\]
+    We can also say that a linear operator $T:\mathcal{H}_1\to\mathcal{H}_2$ us bounded if there exists $M>0$ so that
+    \[||T(f)||_{\mathcal{H}_2}\leq M||f||_{\mathcal{H}_1}\]
+    The norm of $T$ is denoted by $||T||_{\mathcal{H}_1\to \mathcal{H}_2}$ and defined by
+    \[||T||=\inf M\]
+\end{definition}
+
+\begin{lemma}
+    $||T||=\sup\{|(Tf,g)|:\ ||f||\leq 1,\ ||g||\leq 1\}$, where of course $f\in \mathcal{H}_1$ and $g\in \mathcal{H}_2$.
+\end{lemma}
+
+\begin{definition}
+    A linear transformation $T$ is continous if $T(f_n)\to T(f)$ whenever $f_n\to f$.
+\end{definition}
+
+\begin{proposition}
+    A linear operator $T:\mathcal{H}_1\to\mathcal{H}_2$ is bounded if and only if it is continuous.
+\end{proposition}
+
+\begin{definition}
+    A \textbf{linear functional} $l$ is a linear transformation from Hilbert space $\mathcal{H}$ to the underlying field of scalars, which we may assume to be the complex numbers,
+    \[l:\mathcal{H}\to\mathbb{C}\]
+\end{definition}
+
+\begin{definition}
+    Let $l$ be a continuous linear functional on a Hilbert space $\mathcal{H}$. Then, there exists a unique $g\in\mathcal{H}$ such that
+    \[l(f)=(f,g)\quad for\ all\ f\in\mathcal{H}\]
+    Moreover, $||l||=||g||$
+\end{definition}
+
+\begin{proposition}
+    Let $T:\mathcal{H}\to\mathcal{H} $ be a bounded linear transformation. There exists a unique bounded linear transformation $T^*$on $\mathcal{H} $ so that:
+    \begin{description}
+        \item[(i)] $(Tf,g)=(f,T^*,g)$.
+        \item[(ii)] $||T||=||T^*||$.
+        \item[(iii)] $(T^*)^*=T$
+    \end{description}
+    The linear operator $T^*:\mathcal{H}\to\mathcal{H}$ satisfting the above conditions is called the \textbf{adjoint} of $T$.
+\end{proposition}
+
+\begin{definition}
+    Suppose $\{\varphi_k\}_{k=1}^\infty$ is an orthonormal basis of $\mathcal{H}$. Then, a linear transformation $T:\mathcal{H}\to\mathcal{H}$ is said to be diagonized with respect to the basis $\{\varphi_k\}$ If
+    \[T(\varphi_k)=\lambda_k\varphi_k,\quad where\ \lambda_k\in\mathbb{C}\ for\ all\ k.\]
+\end{definition}
 \section*{References}
 \end{document}
